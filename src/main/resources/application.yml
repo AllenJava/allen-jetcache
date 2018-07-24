@@ -1,0 +1,39 @@
+server:
+  port: 8082
+  context-path: /jetcache
+  
+spring:
+  datasource: 
+    url: jdbc:mysql://192.168.0.234:3306/material_manage_platform?useUnicode=true&characterEncoding=utf-8
+    username: dcc_dev
+    password: 123456
+    driverClassName: com.mysql.jdbc.Driver
+    
+#mybatis config
+mybatis: 
+   type-aliases-package: com.allen.dao.entity
+   mapper-locations: classpath:mybatis/mapper/*.xml
+
+
+#jetcache config
+jetcache:
+  statIntervalMinutes: 15
+  areaInCacheName: false
+  local:
+    default:
+      type: linkedhashmap
+      keyConvertor: fastjson
+  remote:
+    default:
+      type: redis
+      keyConvertor: fastjson
+      valueEncoder: java
+      valueDecoder: java
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      host: 192.168.0.237
+      port: 6379
+      database: 12
+      password: c0b88d47754f79ad2b7c26cec6417326
